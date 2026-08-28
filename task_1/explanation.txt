@@ -1,1 +1,18 @@
+Question: 	Why you chose this approach over alternatives.
+Answer: The approach i used is a hybrid recommendation approach that combines semantic similarity with structured preference matching. The semantic component uses sentence embeddings to capture the meaning of a user's query and compare it with restaurant descriptions. I combined this with structured signals such as cuisine, price range and location.  I chose it over a rule-based approach, a basic machine learning approach, or an LLM-based approach for these reasons: 
+i. A rule-based approach would be more dependent on exact keywords and could be less flexible with natural-language queries.
+ii. An LLM-based approach could handle natural language well, but it would introduce unnecessary API dependency and could make ranking less deterministic.
+iii. A basic machine learning approach would not be completely relaible because the dataset provided (25 cases) is really small, so i do not have a good number of sample restaurants and user history. There is not enough data to reliably train a supervised ranking or collaborative-filtering model.
+
+Overall, I chose the hybrid approach because it works well with the small amount of data available, can understand natural-language queries, and still gives me direct control over important preferences such as cuisine, price and location.
+
+
+Question:	How you would evaluate whether the recommendations are actually good, once live.
+Answer: Once the system is live, I would look at how users interact with the recommendations. I would track metrics such as how often users click on recommended restaurants, view their details, save them, and eventually place an order. If users frequently interact with and order from the recommended restaurants, it would be a good indication that the recommendations are useful. I would also compare the recommendation system against a simple baseline using A/B testing. For example, one group of users could receive recommendations from the current system while another group receives recommendations from a simpler method. I would then compare their engagement and order rates to see whether the recommendation system is actually providing an improvement
+
+
+Question: 	How this would need to change if LocalBuka had 1 million users instead of 20 sample records.
+Answer: The current system would become inefficient with a much larger number of data, so I would move from the current approach to a multi-stage recommendation system. 
+The first stage would be candidate generation, where the system quickly selects a smaller set of potentially relevant restaurants using methods such as semantic search, popular restaurants and the user's past behaviour. The second stage would apply hard constraints, such as dietary restrictions and other requirements that is important to the user. Finally, a machine-learning model would rank the remaining candidates using signals such as the user's preferences, past orders and interactions.
+I would also pre-compute restaurant embeddings and store user behaviour in a scalable database so that recommendations do not have to be calculated from scratch for every request. This would allow the system to handle a much larger amount of data while also making better use of the user behaviour available at that scale.
 
