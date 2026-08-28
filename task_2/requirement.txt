@@ -1,0 +1,11 @@
+Question: What could go wrong with this assistant in production (e.g. giving wrong info, inappropriate responses), and how you would guard against it.
+Answer: There is the risk that the assistant could provide incorrect information, such as recommending a restaurant or dish that does not exist in the available data. 
+Since the assistant uses an LLM, it could also misunderstand a user's request or generate inappropriate responses.
+To reduce these issues, I would make the restaurant database the only valid source and restrict the assistant to informatipn that is available in the database.
+I would also validate recommendations against the database before showing them to the user. Clear system instructions and basic input and output checks could also be used to prevent inappropriate or unrelated responses.
+
+Question: How you would keep API costs under control if using a paid LLM provider.
+Answer: I would avoid sending unnecessary information to the LLM on every request. Instead of sending the entire restaurant dataset and a long conversation history 
+each time, I would first identify the relevant restaurants and only provide the necessary information to the model. I would also use a smaller and cheaper model where possible, limit the amount of conversation history and 
+set reasonable token limits for responses. Simple requests such as greetings can be handled without calling the LLM at all, so I wpuld do that.
+Caching repeated queries and responses could also reduce unnecessary API calls.
